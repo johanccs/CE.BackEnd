@@ -2,6 +2,7 @@
 using CE.Domain.Dtos;
 using CE.Services.Mocks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace CE.Tests.Services
@@ -20,28 +21,28 @@ namespace CE.Tests.Services
         }
 
         [Fact]
-        public void Should_NotReturn_NullInProgressStatus_List()
+        public async Task Should_NotReturn_NullInProgressStatus_List()
         {
 
-            var results = _orderService.GetAllByInProgressStatus();
+            var results = await _orderService.GetAllByInProgressStatus();
 
             Assert.NotNull(results);
         }
 
         [Fact]
-        public void Should_Return_One_Or_More_Orders()
+        public async Task Should_Return_One_Or_More_Orders()
         {
 
-            var results = _orderService.GetAllByInProgressStatus();
+            var results = await _orderService.GetAllByInProgressStatus();
 
             Assert.True(results.Count > 0);
         }
 
         [Fact]
-        public void Should_Return_Top_Five_Products_Sold()
+        public async Task Should_Return_Top_Five_Products_Sold()
         {
 
-            var results = _orderService.GetTopFiveProductsSold();
+            var results = await _orderService.GetTopFiveProductsSold();
 
             Assert.True(results.Count == 5);
             Assert.True(results.GetType() == typeof(List<Line>));
