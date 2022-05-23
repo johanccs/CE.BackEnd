@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\CE.Contracts\CE.Contracts.csproj" />
+    <ProjectReference Include="..\CE.Domain\CE.Domain.csproj" />
+    <ProjectReference Include="..\CE.Services\CE.Services.csproj" />
   </ItemGroup>
 
 </Project>
