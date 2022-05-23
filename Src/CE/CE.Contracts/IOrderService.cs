@@ -1,11 +1,12 @@
 ﻿using CE.Domain.Dtos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CE.Contracts
 {
     public interface IOrderService
     {
-        IReadOnlyList<Order> GetAllByInProgressStatus();
-        IReadOnlyList<Line> GetTopFiveProductsSold();
+        Task<List<Order>> GetAllByInProgressStatus();
+        Task<List<Line>> GetTopFiveProductsSold();
     }
 }

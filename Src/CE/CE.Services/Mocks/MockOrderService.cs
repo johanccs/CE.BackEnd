@@ -3,6 +3,7 @@ using CE.Domain.Dtos;
 using CE.Domain.Enums;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CE.Services.Mocks
 {
@@ -67,14 +68,14 @@ namespace CE.Services.Mocks
 
         #endregion
 
-        public IReadOnlyList<Order> GetAllByInProgressStatus()
+        public async Task<List<Order>> GetAllByInProgressStatus()
         {
-            return _orders.Where(x=>x.Status == STATUSES.IN_PROGRESS).ToList();
+            return await Task.FromResult(_orders.Where(x => x.Status == STATUSES.IN_PROGRESS).ToList());
         }
 
-        public IReadOnlyList<Line> GetTopFiveProductsSold()
+        public async Task<List<Line>> GetTopFiveProductsSold()
         {
-            var inprogress_Orders = GetAllByInProgressStatus();
+            var inprogress_Orders = await GetAllByInProgressStatus();
 
             var topFiveProducts = inprogress_Orders.SelectMany(x => x.Lines).OrderByDescending(x => x.Quantity).Take(5).ToList();
            
