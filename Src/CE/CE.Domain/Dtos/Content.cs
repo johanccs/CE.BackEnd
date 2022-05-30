@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CE.Domain.Dtos
 {
-    public class Order
+    public class Content
     {
         public int Id { get; set; }
         public string ChannelName { get; set; }
@@ -31,7 +34,7 @@ namespace CE.Domain.Dtos
         public double OriginalShippingCostsVat { get; set; }
         public double OriginalTotalInclVat { get; set; }
         public double OriginalTotalVat { get; set; }
-        public List<Line> Lines { get; set; } = new List<Line>();
+        public List<Line> Lines { get; set; }
         public double ShippingCostsInclVat { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -42,6 +45,6 @@ namespace CE.Domain.Dtos
         public string CurrencyCode { get; set; }
         public DateTime OrderDate { get; set; }
         public object ChannelCustomerNo { get; set; }
-        public ExtraDataDto ExtraData { get; set; }
+        public ExtraData ExtraData { get; set; }
     }
 }

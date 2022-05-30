@@ -1,6 +1,4 @@
 using CE.IoC;
-using CE.Services;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +20,7 @@ namespace CE.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(MediatREntryPoint).Assembly);
+            services.RegisterMediatR();
             services.RegisterServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -40,6 +38,8 @@ namespace CE.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CE.Api v1"));
             }
+
+            app.UseCors(options => options.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
