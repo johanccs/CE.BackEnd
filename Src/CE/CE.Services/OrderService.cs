@@ -1,5 +1,5 @@
 ﻿using CE.Contracts;
-using CE.Domain.Dtos;
+using CE.Domain.Entities;
 using CE.Services.Helper;
 using System.Text.Json;
 using System;
@@ -29,17 +29,19 @@ namespace CE.Services
 
         #endregion
 
+        #region Methods
 
         public async Task<Root> GetAllByInProgressStatus()
         {
             try
             {
+                var api_url = $"{url}?statuses=IN_PROGRESS";
                 var options = new JsonSerializerOptions()
                 {
                     NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString 
                 };
 
-                var result = await RemoteApiHelper.Get(url, api_key, status);
+                var result = await RemoteApiHelper.GetAsync(api_url, api_key, status);
 
                 Root returnResult = JsonSerializer.Deserialize<Root>(result, options);
 
@@ -56,7 +58,8 @@ namespace CE.Services
         {
             try
             {
-                var result = await RemoteApiHelper.Get(url, api_key, status);
+                var api_url = $"{url}?statuses=IN_PROGRESS";
+                var result = await RemoteApiHelper.GetAsync(api_url, api_key, status);
 
                 Root returnResult = JsonSerializer.Deserialize<Root>(result);
 
@@ -65,7 +68,7 @@ namespace CE.Services
                 return topFiveProducts;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -75,7 +78,8 @@ namespace CE.Services
         {
             try
             {
-                var result = await RemoteApiHelper.Get(url, api_key, status);
+                var api_url = $"{url}?statuses=IN_PROGRESS";
+                var result = await RemoteApiHelper.GetAsync(api_url, api_key, status);
 
                 Root returnResult = JsonSerializer.Deserialize<Root>(result);
 
@@ -87,5 +91,7 @@ namespace CE.Services
                 throw;
             }
         }
+
+        #endregion
     }
 }

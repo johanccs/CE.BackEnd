@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CE.Domain.Dtos
+namespace CE.Domain.Entities
 {
     public class Line
     {

@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Logging\" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CE.Contracts\CE.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

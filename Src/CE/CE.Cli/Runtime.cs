@@ -1,6 +1,5 @@
 ﻿using CE.Contracts;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CE.Cli
@@ -10,14 +9,16 @@ namespace CE.Cli
         #region Readonly Fields
 
         private readonly IOrderService _orderService;
+        private readonly ILoggerService _loggerService;
 
         #endregion
 
         #region Ctor
 
-        public Runtime(IOrderService orderService)
+        public Runtime(IOrderService orderService, ILoggerService loggerService)
         {
             _orderService = orderService;
+            _loggerService = loggerService;
         }
 
         #endregion
@@ -26,6 +27,8 @@ namespace CE.Cli
 
         public async Task Run()
         {
+            _loggerService.LoginIngo("Start Runtime");
+
             var answer = await DisplayMenu();
 
             await DisplayByMenuItem(answer);
