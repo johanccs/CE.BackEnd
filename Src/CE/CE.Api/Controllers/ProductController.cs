@@ -1,6 +1,8 @@
 ﻿using CE.Api.ViewModels;
-using CE.Domain.Dtos;
+using CE.Contracts;
+using CE.Domain.Entities;
 using CE.Services.Features.Orders.Requests.Queries;
+using CE.Services.Features.Products.Requests.Commands;
 using CE.Services.Features.Products.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +19,16 @@ namespace CE.Api.Controllers
         #region Readonly Fields
 
         private readonly IMediator _mediatR;
+        private readonly ILoggerService _loggerService;
 
         #endregion
 
         #region Ctor
 
-        public ProductController(IMediator mediatR)
+        public ProductController(IMediator mediatR, ILoggerService loggerService)
         {
             _mediatR = mediatR;
+            _loggerService = loggerService;
         }
 
         #endregion
@@ -43,10 +47,13 @@ namespace CE.Api.Controllers
 
                 var response = Map(results);
 
+                _loggerService.LoginIngo($"{response.Count} Products found");
+
                 return Ok(response);
             }
             catch (Exception ex)
             {
+                _loggerService.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
@@ -57,7 +64,7 @@ namespace CE.Api.Controllers
         {
             try
             {
-                var results = await _mediatR.Send(new GetTOpFiveOrdersWithIDRequest());
+                 var results = await _mediatR.Send(new GetTOpFiveOrdersWithIDRequest());
 
                 if (results == null)
                     return NotFound("No orders were found");
@@ -75,9 +82,11 @@ namespace CE.Api.Controllers
         {
             try
             {
-                var prod = product;
+                var results = await _mediatR.Send(
+                    new UpdateProductQtyCommand(
+                        product.Id, product.GTIN, product.Description, product.Qty));
 
-                return Ok(null);
+                return Ok(results);
             }
             catch (Exception ex)
             {

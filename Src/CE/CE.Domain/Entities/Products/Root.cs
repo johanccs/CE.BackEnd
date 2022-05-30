@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CE.Domain.Dtos
+namespace CE.Domain.Entities.Products
 {
     public class Root
     {

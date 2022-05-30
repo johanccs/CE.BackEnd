@@ -1,4 +1,4 @@
-﻿using CE.Domain.Dtos;
+﻿using CE.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace CE.Api.ViewModels
+﻿namespace CE.Domain.Entities
 {
     public class ProductToBeUpdatedWithId
     {

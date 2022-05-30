@@ -1,5 +1,6 @@
 ﻿using CE.Api.ViewModels;
-using CE.Domain.Dtos;
+using CE.Contracts;
+using CE.Domain.Entities;
 using CE.Services.Features.Orders.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,16 @@ namespace CE.Api.Controllers
         #region Readonly Fields
       
         private readonly IMediator _mediatR;
+        private readonly ILoggerService _loggerService;
 
         #endregion
 
         #region Ctor
 
-        public OrdersController(IMediator mediatR)
+        public OrdersController(IMediator mediatR, ILoggerService loggerService)
         {
            _mediatR = mediatR;
+            _loggerService = loggerService;
         }
 
         #endregion
@@ -32,6 +35,7 @@ namespace CE.Api.Controllers
         #region Methods
 
         [HttpGet]
+        [ResponseCache(Duration = 120, Location = ResponseCacheLocation.Client)]
         public async Task<IActionResult>GetOrdersByInProgressStatus()
         {
             try
@@ -45,6 +49,7 @@ namespace CE.Api.Controllers
             }
             catch (Exception ex)
             {
+                _loggerService.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
         }

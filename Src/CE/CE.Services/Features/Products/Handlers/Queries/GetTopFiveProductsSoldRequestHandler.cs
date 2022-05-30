@@ -1,5 +1,5 @@
 ﻿using CE.Contracts;
-using CE.Domain.Dtos;
+using CE.Domain.Entities;
 using CE.Services.Features.Products.Requests.Queries;
 using MediatR;
 using System.Collections.Generic;

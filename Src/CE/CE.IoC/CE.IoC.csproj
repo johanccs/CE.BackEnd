@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CE.Contracts\CE.Contracts.csproj" />
+    <ProjectReference Include="..\CE.Infrastructure\CE.Infrastructure.csproj" />
     <ProjectReference Include="..\CE.Services\CE.Services.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,5 @@
-﻿using CE.Domain.Dtos;
+﻿using CE.Domain.Entities;
 using MediatR;
-using System.Collections.Generic;
 
 namespace CE.Services.Features.Orders.Requests.Queries
 {
