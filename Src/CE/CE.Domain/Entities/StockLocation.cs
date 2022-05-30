@@ -1,4 +1,4 @@
-﻿namespace CE.Domain.Dtos
+﻿namespace CE.Domain.Entities
 {
     public class StockLocation
     {

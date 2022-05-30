@@ -1,4 +1,4 @@
-﻿using CE.Domain.Dtos;
+﻿using CE.Domain.Entities;
 using MediatR;
 using System.Collections.Generic;
 
