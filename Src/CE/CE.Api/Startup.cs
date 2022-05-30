@@ -39,6 +39,8 @@ namespace CE.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CE.Api v1"));
             }
 
+            app.UseCors(options => options.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

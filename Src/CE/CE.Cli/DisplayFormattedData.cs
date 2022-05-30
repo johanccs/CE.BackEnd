@@ -17,7 +17,7 @@ namespace CE.Cli
             Console.WriteLine(builder.ToString());
         }
 
-        public static void WriteBody(List<Order> orders)
+        public static void WriteBody(List<Content> orders)
         {
             var builder = new StringBuilder();
 

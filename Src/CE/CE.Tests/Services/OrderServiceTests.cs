@@ -1,13 +1,13 @@
 ﻿using CE.Contracts;
 using CE.Domain.Dtos;
-using CE.Services.Mocks;
+using CE.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace CE.Tests.Services
 {
-    public class MockOrderServiceTests
+    public class OrderServiceTests
     {
         #region Readonly Fields
 
@@ -15,10 +15,16 @@ namespace CE.Tests.Services
 
         #endregion
 
-        public MockOrderServiceTests()
+        #region Ctor
+
+        public OrderServiceTests()
         {
-            _orderService = new MockOrderService();
+            _orderService = new OrderService();
         }
+
+        #endregion
+
+        #region Methods
 
         [Fact]
         public async Task Should_NotReturn_NullInProgressStatus_List()
@@ -35,17 +41,20 @@ namespace CE.Tests.Services
 
             var results = await _orderService.GetAllByInProgressStatus();
 
-            //Assert.True(results.Count > 0);
+            Assert.True(results.Content.Count > 0);
         }
 
         [Fact]
         public async Task Should_Return_Top_Five_Products_Sold()
         {
 
-            var results = await _orderService.GetTopFiveProductsSold();
+            var results = await _orderService.GetTopFiveProductsWithIDSold();
 
             Assert.True(results.Count == 5);
             Assert.True(results.GetType() == typeof(List<Line>));
         }
+
+        #endregion
+
     }
 }

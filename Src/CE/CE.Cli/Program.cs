@@ -1,6 +1,7 @@
 ﻿using CE.Contracts;
 using CE.IoC;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace CE.Cli
@@ -9,15 +10,23 @@ namespace CE.Cli
     {
         async static Task Main(string[] args)
         {
-            IServiceCollection services = new ServiceCollection();
-            
-            services.RegisterServices();
+            try
+            {
 
-            var serviceProvider = services.BuildServiceProvider();
+                IServiceCollection services = new ServiceCollection();
 
-            var rt = new Runtime(serviceProvider.GetService<IOrderService>());
+                services.RegisterServices();
 
-            await rt.Run();
+                var serviceProvider = services.BuildServiceProvider();
+
+                var rt = new Runtime(serviceProvider.GetService<IOrderService>());
+
+                await rt.Run();
+            }
+            catch (System.Exception)
+            {
+                Environment.Exit(-1);
+            }
         }
     }
 }

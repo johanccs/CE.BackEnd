@@ -6,7 +6,8 @@ namespace CE.Contracts
 {
     public interface IOrderService
     {
-        Task<List<Order>> GetAllByInProgressStatus();
+        Task<Root> GetAllByInProgressStatus();
         Task<List<Line>> GetTopFiveProductsSold();
+        Task<Root> GetTopFiveProductsWithIDSold();
     }
 }

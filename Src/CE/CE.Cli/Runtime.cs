@@ -39,6 +39,8 @@ namespace CE.Cli
             Console.WriteLine("1. Orders By In progress status");
             Console.WriteLine("2. Top five products sold");
             Console.WriteLine("3. Update product quantity");
+            Console.WriteLine("");
+            Console.WriteLine("0 - Exit");
 
             Console.WriteLine("");
 
@@ -51,12 +53,16 @@ namespace CE.Cli
         {
             switch(answer)
             {
+                case 0:
+                    Environment.Exit(0);
+                    break;
                 case 1:
                      PrintAndClearEmptyLine();
                      await DisplayOrdersInProgress();
                      break;
 
                 case 2:
+                    PrintAndClearEmptyLine();
                     await DisplayTopFiveProducts();
                     break;
 
@@ -68,17 +74,28 @@ namespace CE.Cli
                     Console.Clear();
                     await DisplayMenu();
                     return;
-
             }
 
             Console.WriteLine("");
             Console.Write("Press 9 to go to Main Menu: ");
-            var ans = Convert.ToInt32(Console.ReadLine());
 
-            if (ans == 9)
+            var ans = Console.ReadLine();
+
+            if (!string.IsNullOrEmpty(ans))
             {
-                Console.Clear();
-                await DisplayMenu();
+                var convertedAns = Convert.ToInt32(ans);
+
+                if (convertedAns == 9)
+                {
+                    Console.Clear();
+                    var rans = await DisplayMenu();
+                    await DisplayByMenuItem(rans);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection");
+                return;
             }
         }
 
@@ -89,7 +106,13 @@ namespace CE.Cli
 
         private async Task DisplayTopFiveProducts()
         {
-            throw new NotImplementedException();
+            var results = await _orderService.GetTopFiveProductsSold();
+
+            if(results.Count > 0)
+            {
+                DisplayFormattedProductData.WriteHeader();
+                DisplayFormattedProductData.WriteBody(results);
+            }
         }
 
         private async Task DisplayOrdersInProgress()
@@ -99,7 +122,7 @@ namespace CE.Cli
             if (results.Count > 0)
             {
                 DisplayFormattedData.WriteHeader();
-                DisplayFormattedData.WriteBody(results);
+                DisplayFormattedData.WriteBody(results.Content);
             }
         }
 

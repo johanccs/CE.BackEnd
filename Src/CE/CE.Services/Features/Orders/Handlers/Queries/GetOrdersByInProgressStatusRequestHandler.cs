@@ -1,14 +1,13 @@
 ﻿using CE.Contracts;
 using CE.Domain.Dtos;
-using CE.Services.Features.Orders.Requests;
+using CE.Services.Features.Orders.Requests.Queries;
 using MediatR;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CE.Services.Features.Orders.Handlers.Requests
+namespace CE.Services.Features.Orders.Handlers.Queries
 {
-    public class GetOrdersByInProgressStatusRequestHandler : IRequestHandler<GetOrdersByInProgressStatusRequest, List<Order>>
+    public class GetOrdersByInProgressStatusRequestHandler : IRequestHandler<GetOrdersByInProgressStatusRequest, Root>
     {
         #region Readonly Fields
 
@@ -25,7 +24,7 @@ namespace CE.Services.Features.Orders.Handlers.Requests
 
         #endregion
 
-        public async Task<List<Order>> Handle(GetOrdersByInProgressStatusRequest request, CancellationToken cancellationToken)
+        public async Task<Root> Handle(GetOrdersByInProgressStatusRequest request, CancellationToken cancellationToken)
         {
             var results = await _orderService.GetAllByInProgressStatus();
 

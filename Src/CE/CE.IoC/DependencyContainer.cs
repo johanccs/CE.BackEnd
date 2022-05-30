@@ -1,6 +1,5 @@
 ﻿using CE.Contracts;
 using CE.Services;
-using CE.Services.Mocks;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +9,7 @@ namespace CE.IoC
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IOrderService, MockOrderService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         public static void RegisterMediatR(this IServiceCollection services)
