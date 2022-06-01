@@ -50,8 +50,9 @@ namespace CE.Tests.Services
 
             var results = await _orderService.GetTopFiveProductsWithIDSold();
 
-            Assert.True(results.Count == 5);
-            Assert.True(results.GetType() == typeof(List<Line>));
+            Assert.True(results.Content.Count == 5);
+            
+            Assert.True(results.GetType() == typeof(Root));
         }
 
         #endregion

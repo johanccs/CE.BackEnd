@@ -83,8 +83,9 @@ namespace CE.Services
 
                 Root returnResult = JsonSerializer.Deserialize<Root>(result);
 
-                return returnResult;
+                returnResult.Content = returnResult.Content.Take(5).ToList();
 
+                return returnResult;
             }
             catch (Exception)
             {

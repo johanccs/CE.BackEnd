@@ -23,7 +23,6 @@ namespace CE.Tests.Services
         [Fact]
         public async Task Should_NotReturn_NullInProgressStatus_List()
         {
-
             var results = await _orderService.GetAllByInProgressStatus();
 
             Assert.NotNull(results);
@@ -32,16 +31,14 @@ namespace CE.Tests.Services
         [Fact]
         public async Task Should_Return_One_Or_More_Orders()
         {
-
             var results = await _orderService.GetAllByInProgressStatus();
 
-            //Assert.True(results.Count > 0);
+            Assert.True(results.Content.Count > 0);
         }
 
         [Fact]
         public async Task Should_Return_Top_Five_Products_Sold()
         {
-
             var results = await _orderService.GetTopFiveProductsSold();
 
             Assert.True(results.Count == 5);
